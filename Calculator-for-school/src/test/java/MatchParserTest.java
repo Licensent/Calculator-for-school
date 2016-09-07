@@ -20,15 +20,10 @@ public class MatchParserTest {
     }
 
     @Test
-    public void invalidStatement() throws Exception {
-        double parse = matchParser.parse("2+5s");
-        Assert.assertNull(parse);
-    }
-
-    @Test
     public void minus() throws Exception {
         double parse = matchParser.parse("-2");
         Assert.assertEquals(new Double(-2), new Double(parse));
     }
+
 
 }

@@ -8,7 +8,7 @@ public class DoubleRoundTest {
     double templateDouble =0;
     public Double doubleRound(Double i){
         templateDouble =i;
-        double newDouble = new BigDecimal(templateDouble).setScale(4, RoundingMode.UP).doubleValue();
+        double newDouble = new BigDecimal(templateDouble).setScale(4, RoundingMode.HALF_UP).doubleValue();
         return newDouble;
     }
 

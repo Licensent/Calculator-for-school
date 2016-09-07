@@ -2,7 +2,8 @@
  * Created by DarthVader on 03.09.2016.
  */
 public class MatchParser {
-        public MatchParser() {}
+    public MatchParser() {
+    }
 
     public double parse(String s) throws Exception {
         Result result = plusMinus(s);
@@ -80,8 +81,17 @@ public class MatchParser {
             negative = true;
             s = s.substring(1);
         }
-        // разрешаем только цифры и точку
-        while (i < s.length() && (Character.isDigit(s.charAt(i)) || s.charAt(i) == '.')) {
+        // разрешаем только цифры и точку,после которой тоже идет число, а так же проверяем наличие на char
+        while ((i < s.length()) && (Character.isDigit(s.charAt(i)) || Character.isLetter(s.charAt(i))
+                || (s.charAt(i) == '.'))) {
+            // если срфк присутвуют возбуждаем исключение
+            if (Character.isLetter(s.charAt(i)) == true) {
+                throw new Exception("not valid number, expect number, find letter '" + s.substring(0, i + 1) + "'");
+            }
+            // но если посли точки нет числа, возбуждаем исключение!
+            if ((s.charAt(i) == '.' && (!(Character.isDigit(s.charAt(i + 1)))) && (!(Character.isLetter(s.charAt(i+1)))))==true) {
+                throw new Exception("not valid number, expect double, find '" + s.substring(0, i + 3) + "'");
+            }
             // но также проверям, что в числе может быть только одна точка!
             if (s.charAt(i) == '.' && ++dot_cnt > 1) {
                 throw new Exception("not valid number '" + s.substring(0, i + 1) + "'");
@@ -97,6 +107,7 @@ public class MatchParser {
         String restPart = s.substring(i);
 
         return new Result(dPart, restPart);
+
     }
 
 }
