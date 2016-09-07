@@ -12,4 +12,5 @@ public interface Calculator {
      * @return string value containing result of evaluation or null if statement is invalid
      */
     String evaluate(String statement);
+
 }
